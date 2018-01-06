@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #ul1{
+            width:200px;
+            height:200px;
+            border:1px solid red;
+        }
+    </style>
+</head>
+<body>
+<ul id="ul1"></ul>
+<ul id="ul2"></ul>
+<script type="text/javascript">
+    var oUl = document.getElementById('ul1');
+    var oUl2=document.getElementById('ul2');
+    console.log(oUl);
+    for(var i=1;i<=5;i++){
+        var oLi = document.createElement('li');
+        oLi.innerHTML='<span>'+i+'</span>'+' user: '+i;
+        oUl.appendChild(oLi);
+    }
+
+    var str='';
+    for(var i=1;i<=6;i++){
+        str+='<li>'
+        str+='<span>'+i+'</span>'+'myname is apple';
+        str+='</li>'
+    }
+    oUl2.innerHTML+=str;
+    //oUl2.appendChild(str);
+
+    var frg = document.createDocumentFragment();
+    //var frg = document.createDocumentFragment();
+    for(var i=0;i<7;i++){
+        var oLi=document.createElement('li');
+        oLi.innerHTML='hello';
+        frg.appendChild(oLi);
+    };
+    oUl2.appendChild(frg);
+    frg=null;
+
+    //console.dir(RegExp.prototype);
+    console.dir(document);
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="css/css.css">
+    <script type="text/javascript" src="js/utils.js"></script>
+<script type="text/javascript" src="js/animate.js"></script>
+<script type="text/javascript" src="js/banner.js"></script>
+</head>
+<body>
+<div id="banner" class="bannerFir">
+    <div class="bannerInner">
+
+    </div>
+    <ul class="bannerTip">
+        <li class="bg"></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <a href="javascript:;" class="prev">&lt;</a>
+    <a href="javascript:;" class="next">&gt;</a>
+</div>
+</body>
+
+<script type="text/javascript">
+    var banner= document.getElementById("banner");
+    var bannerInner = banner.getElementsByClassName("bannerInner")[0];
+    var imgs=bannerInner.getElementsByTagName("img");
+    var bannerTip = banner.getElementsByTagName("ul")[0];
+    var olis = bannerTip.getElementsByTagName("li");
+    var prev=banner.getElementsByTagName('a')[0];
+    var next=banner.getElementsByTagName("a")[1];
+
+   // console.log(lis.length);
+
+  //console.log("bannerInner");
+  //实现自动轮播
+    var step=0;
+    autoTimer=window.setInterval(autoMove,2000);
+    function autoMove(){
+
+        if(step>imgs.length-2){
+            step=0;
+            utils.setCss(bannerInner,"left",0)
+        }
+
+        step++;
+        animate(bannerInner,{left:-step*924},900);
+        changeTip();
+    }
+
+    banner.onmouseover=function(){
+        clearInterval(autoTimer);
+        prev.style["display"]="block";
+        next.style["display"]="block";
+
+    };
+    banner.onmouseout=function(){
+        autoTimer=window.setInterval(autoMove,2000);
+        prev.style["display"]="none";
+        next.style["display"]="none";
+    };
+
+    function hasClass(curEle, className){
+        var reg = new RegExp("(^| +)"+className+"( +|$)");
+        return reg.test(curEle.className);
+    }
+
+    function addClass(curEle,className){
+        var ary = className.split(/ +/g);
+        for(var i=0;i<ary.length;i++){
+            if(!hasClass(curEle,ary[i])){
+                curEle.className+=" "+className;
+            }
+        }
+
+    }
+
+    function removeClass(curEle,className){
+       var aryName = className.split(/ +/g);
+       for(var i=0;i<aryName.length;i++){
+            if(hasClass(curEle,aryName[i])){
+                var reg = new RegExp("(^| +)"+aryName[i]+"( +|$)","g");
+               curEle.className = curEle.className.replace(reg," ");
+            }
+       }
+
+    }
+
+
+
+    //实现焦点切换
+    function changeTip(){
+
+        var tempStep = step>olis.length-1?0:step;
+        
+
+        for(var i=0;i<olis.length;i++){
+            if(i===tempStep){
+                addClass(olis[i],"bg")
+            }else{
+                removeClass(olis[i],"bg")
+            }
+
+
+               };
+
+
+
+        }
+
+
+
+
+    //点击焦点 实现轮播图切换
+
+    ~function(){
+        for(var i=0;i<olis.length;i++){
+
+        olis[i].index=i;
+        olis[i].onclick=function(){
+            step=this.index;
+            animate(bannerInner,{left:-step*924},100) ;
+         }
+        }
+    }();
+
+    //左右切换
+    ~function(){
+        next.onclick=autoMove;
+
+        prev.onclick=function(){
+            if(step===0){
+                step=imgs.length-1
+
+                utils.setCss(bannerInner,"left",-step*924);
+            }
+            step--;
+            animate(bannerInner,{left:-step*924},500);
+            changeTip();
+
+        }
+    }()
+   
+
+
+</script>
+</html>

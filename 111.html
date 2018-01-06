@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #outer{
+            margin:10px auto;
+            width:400px;
+            height:400px;
+            background:red;
+            /*border:black 2px solid;*/
+        }
+        #inner{
+            margin:100px auto;
+            width:200px;
+            height: 200px;
+            background:green;
+            /*border: black 1px solid;*/
+        }
+
+        #center{
+            margin:50px auto;
+            width:100px;
+            height:100px;
+            background:yellow;
+            /*border:1px black solid;*/
+        }
+    </style>
+</head>
+<body>
+<div id="outer">
+    <div id="inner">
+        <div id="center1"></div>
+    </div>
+    <div id="inner2">
+        <div id="center2"></div>
+    </div>
+    <div id="inner3">
+        <div id="center3"></div>
+    </div>
+    <p><span></span></p>
+    <p><h2></h2></p>
+</div>
+</body>
+<script type="text/javascript" src="utils.js"></script>
+<script type="text/javascript">
+    var outer=document.getElementById('inner');
+    console.log(utils.offSet(outer).top)
+
+    console.log(utils.children(outer).length);
+    console.log(utils.nextAll(inner));
+</script>

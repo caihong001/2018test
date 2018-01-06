@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #outer{
+            margin:10px auto;
+            width:400px;
+            height:400px;
+            background:red;
+            border:black 2px solid;
+        }
+        #inner{
+            margin:100px auto;
+            width:200px;
+            height: 200px;
+            background:green;
+            border: black 1px solid;
+        }
+
+        #center{
+            margin:50px auto;
+            width:100px;
+            height:100px;
+            background:yellow;
+            border:1px black solid;
+        }
+    </style>
+</head>
+<body>
+<div id="outer">
+    <div id="inner">
+        <div id="center"></div>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    function offset(curEle){
+        var totalLeft=null, totalTop=null, par=curEle.offsetParent;
+        totalLeft+=curEle.offsetLeft;
+        totalTop+=curEle.offsetTop;
+
+        while(par){
+            if(navigator.userAgent.indexOf('MSIE 8.0')===-1){
+                totalLeft+=par.clientLeft;
+                totalTop+=par.clientTop;
+            }
+            
+            totalLeft+=par.offsetLeft;
+            totalTop+=par.offsetTop;
+
+            par = par.offsetParent;
+        }
+        return {left:totalLeft,top:totalTop}
+    }
+    console.log(offset(center));
+    console.log(offset(outer));
+</script>
+</html>
